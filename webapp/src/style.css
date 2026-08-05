@@ -1,0 +1,307 @@
+:root {
+  --bg-color: #0d1b2a;
+  --panel-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --primary-color: #00b894;
+  --secondary-color: #fdcb6e;
+  --danger-color: #ff7675;
+  --text-primary: #ffffff;
+  --text-secondary: #a4b0be;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  background-image: radial-gradient(circle at 50% 0%, #1b3a4b 0%, #0d1b2a 70%);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden; /* Prevent scrolling in mini app */
+  user-select: none;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 16px;
+  position: relative;
+}
+
+/* Header */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border: 2px solid var(--secondary-color);
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.userid {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.resources {
+  display: flex;
+  gap: 8px;
+}
+
+.resource-badge {
+  background: var(--panel-bg);
+  border: 1px solid var(--glass-border);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  backdrop-filter: blur(10px);
+}
+
+/* Main Stage */
+.main-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 20px;
+}
+
+.balance-display {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.balance-display h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--secondary-color);
+  text-shadow: 0 4px 15px rgba(253, 203, 110, 0.4);
+}
+
+/* Progress */
+.progress-container {
+  width: 80%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.progress-bar {
+  height: 12px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00b894, #55efc4);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 0.75rem;
+  margin-top: 6px;
+  color: var(--text-secondary);
+}
+
+/* Wheel */
+.wheel-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wheel-arrow {
+  position: absolute;
+  top: -15px;
+  font-size: 2rem;
+  color: #ff7675;
+  z-index: 10;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 8px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 30px rgba(0, 184, 148, 0.2), inset 0 0 20px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+  transition: transform cubic-bezier(0.17, 0.67, 0.12, 0.99) 4s;
+  /* Conic gradient for 8 slices */
+  background: conic-gradient(
+    #ff7675 0 45deg,
+    #74b9ff 45deg 90deg,
+    #55efc4 90deg 135deg,
+    #fdcb6e 135deg 180deg,
+    #a29bfe 180deg 225deg,
+    #ffeaa7 225deg 270deg,
+    #fab1a0 270deg 315deg,
+    #81ecec 315deg 360deg
+  );
+}
+
+/* Adding lines between segments for better definition */
+.wheel::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 50%;
+  background-image: 
+    linear-gradient(0deg, transparent 49.5%, rgba(0,0,0,0.2) 49.5%, rgba(0,0,0,0.2) 50.5%, transparent 50.5%),
+    linear-gradient(45deg, transparent 49.5%, rgba(0,0,0,0.2) 49.5%, rgba(0,0,0,0.2) 50.5%, transparent 50.5%),
+    linear-gradient(90deg, transparent 49.5%, rgba(0,0,0,0.2) 49.5%, rgba(0,0,0,0.2) 50.5%, transparent 50.5%),
+    linear-gradient(135deg, transparent 49.5%, rgba(0,0,0,0.2) 49.5%, rgba(0,0,0,0.2) 50.5%, transparent 50.5%);
+  pointer-events: none;
+}
+
+/* Wheel Segments Text */
+.segment {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  transform-origin: bottom right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  font-weight: 800;
+  font-size: 1rem;
+  /* Math for placing text perfectly requires JS rotation, but we can structure it simply */
+}
+
+/* Center Button */
+.spin-btn {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffeaa7, #fdcb6e);
+  border: 4px solid #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.1s;
+}
+
+.spin-btn:active {
+  transform: scale(0.95);
+}
+
+.spin-text {
+  font-weight: 800;
+  font-size: 0.8rem;
+  color: #2d3436;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.spin-icon {
+  font-size: 1.5rem;
+}
+
+/* Side Actions */
+.side-actions {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-btn {
+  background: var(--panel-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(5px);
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  width: 60px;
+}
+
+.action-btn .icon {
+  font-size: 1.5rem;
+}
+
+.action-btn .label {
+  font-size: 0.6rem;
+  margin-top: 4px;
+}
+
+/* Footer */
+.bottom-bar {
+  padding: 10px 0;
+  margin-top: auto;
+}
+
+.invite-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg, #00b894, #00cec9);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 184, 148, 0.4);
+  transition: transform 0.1s;
+}
+
+.invite-btn:active {
+  transform: scale(0.98);
+}
