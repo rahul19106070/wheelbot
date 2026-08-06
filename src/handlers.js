@@ -165,6 +165,7 @@ export const setupHandlers = (bot) => {
       disable_web_page_preview: true,
       reply_markup: {
         inline_keyboard: [
+          [{ text: '🔗 Share Link', url: `https://t.me/share/url?url=${encodeURIComponent(refLink)}&text=${encodeURIComponent('Join this awesome bot and earn cash easily! ✨')}` }],
           [{ text: '🚀 My Invites', callback_data: 'my_invites' }, { text: '🏆 Leaderboard', callback_data: 'leaderboard' }],
           [{ text: '👥 Refer Tracker', callback_data: 'refer_tracker' }]
         ]
