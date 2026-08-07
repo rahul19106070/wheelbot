@@ -293,6 +293,7 @@ export const setupHandlers = (bot) => {
          parse_mode: 'HTML',
          reply_markup: {
            inline_keyboard: [
+             [{ text: '💬 Message User', url: `tg://user?id=${w.telegramId}` }],
              [{ text: '✅ Mark Paid', callback_data: `paid_${w._id}` }],
              [{ text: '❌ Reject (Refund)', callback_data: `reject_${w._id}` }]
            ]
