@@ -2,6 +2,15 @@ console.log("Starting WheelEarnBot... Deploy Test!");
 import dns from 'dns';
 dns.setDefaultResultOrder('ipv4first');
 
+// Prevent Telegram unhandled rejections from crashing the bot
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection:', reason);
+});
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
+
+
 import { Telegraf } from 'telegraf';
 import express from 'express';
 import cors from 'cors';
