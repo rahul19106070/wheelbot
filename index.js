@@ -1,3 +1,4 @@
+console.log("Starting WheelEarnBot... Deploy Test!");
 import dns from 'dns';
 dns.setDefaultResultOrder('ipv4first');
 
