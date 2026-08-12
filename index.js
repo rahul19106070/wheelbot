@@ -22,6 +22,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Root endpoint for UptimeRobot to ping
+app.get('/', (req, res) => res.send('WheelEarnBot is running!'));
+
 // API: Get user data (handles daily spin reset)
 app.get('/api/user', async (req, res) => {
   const { id } = req.query;
